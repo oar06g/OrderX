@@ -1,7 +1,7 @@
 services:
   mysql:
     image: mysql:latest
-    container_name: mysqldb
+    container_name: mysql
     ports:
       - 3306:3306
     environment:
@@ -46,7 +46,7 @@ services:
     environment:
       MYSQL_USER: orderx
       MYSQL_PASSWORD: 123123
-      MYSQL_HOST: mysqldb
+      MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       MYSQL_DB_USERS: auth_data
   
@@ -60,7 +60,7 @@ services:
     environment:
       MYSQL_USER: orderx
       MYSQL_PASSWORD: 123123
-      MYSQL_HOST: mysqldb
+      MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       MYSQL_DB_USERS: productsdb
 

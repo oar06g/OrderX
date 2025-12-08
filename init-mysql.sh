@@ -1,21 +1,19 @@
 #!/bin/bash
 
-COMPOSE_FILE="infra/docker-compose.yml"
-MYSQL_CONTAINER="mysqldb"
+MYSQL_SERVICE="mysql"
 MYSQL_ROOT_PASSWORD="pass123"
 
 echo "⏳ Waiting for MySQL to be ready..."
 
-# انتظر MySQL
-until docker compose -f $COMPOSE_FILE exec -T $MYSQL_CONTAINER \
-    mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "SELECT 1;" > /dev/null 2>&1; do
+until docker compose -f infra/docker-compose.yml exec -T $MYSQL_SERVICE \
+    mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "SELECT 1;" >/dev/null 2>&1; do
     echo "MySQL not ready yet..."
     sleep 5
 done
 
-echo "✔ MySQL is ready. Creating databases & users..."
+echo "✔ MySQL ready. Creating databases and users..."
 
-docker compose -f $COMPOSE_FILE exec -T $MYSQL_CONTAINER mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "\
+docker compose -f infra/docker-compose.yml exec -T $MYSQL_SERVICE mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "\
 CREATE DATABASE IF NOT EXISTS auth_data; \
 CREATE DATABASE IF NOT EXISTS productsdb; \
 CREATE USER IF NOT EXISTS 'orderx'@'%' IDENTIFIED BY '123123'; \
@@ -23,4 +21,4 @@ GRANT ALL PRIVILEGES ON auth_data.* TO 'orderx'@'%'; \
 GRANT ALL PRIVILEGES ON productsdb.* TO 'orderx'@'%'; \
 FLUSH PRIVILEGES;"
 
-echo "Databases & users created successfully!"
+echo "🎉 Databases initialized successfully!"
