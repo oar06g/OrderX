@@ -1,11 +1,309 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <title>My Microservice</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="OrderX — Modern order-processing platform using Kafka, MySQL, Kubernetes, GitHub CI/CD and Terraform" />
+  <title>OrderX — Infrastructure-Driven Platform</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand:#0d6efd;
+      --accent:#0b5ed7;
+      --muted:#6c757d;
+    }
+    html,body {height:100%}
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: linear-gradient(180deg,#f8fbff 0%,#ffffff 60%);
+      color:#222;
+    }
+    .hero {
+      background: linear-gradient(90deg, rgba(13,110,253,0.06), rgba(11,94,215,0.03));
+      border-radius:.75rem;
+      padding:2rem;
+      box-shadow: 0 6px 18px rgba(13,110,253,0.04);
+    }
+    .feature-card {
+      transition: transform .18s, box-shadow .18s;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow:0 10px 30px rgba(15,20,30,0.06);
+    }
+    .kbd {
+      background:#f3f4f6;
+      border-radius:.35rem;
+      padding:.12rem .5rem;
+      font-size:.85rem;
+    }
+    a:focus, button:focus {outline:3px solid rgba(13,110,253,0.18); outline-offset:2px;}
+    @media (min-width:900px){ .hero{ padding:3rem; } }
+  </style>
 </head>
 <body>
-    <h1>Welcome to My Microservice!</h1>
-    <p>This page is served by Nginx inside Docker.</p>
+
+  <!-- Skip Navigation -->
+  <a class="visually-hidden-focusable btn btn-link position-fixed start-50 translate-middle-x" href="#main">Skip to content</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+          <rect x="1" y="4" width="22" height="16" rx="3" fill="#0d6efd"></rect>
+          <path d="M6 8h12v2H6z" fill="white" opacity="0.9"/>
+          <path d="M6 12h6v2H6z" fill="white" opacity="0.9"/>
+        </svg>
+        <span class="fw-bold">OrderX</span>
+        <small class="text-muted ms-2">infra & streaming</small>
+      </a>
+
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Technologies</a></li>
+          <li class="nav-item"><a class="nav-link" href="#architecture">Architecture</a></li>
+          <li class="nav-item"><a class="nav-link" href="#getting-started">Get Started</a></li>
+          <li class="nav-item ms-lg-3"><a class="btn btn-primary" href="#contact">GitHub / Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main id="main" class="container py-5">
+
+    <!-- HERO -->
+    <section id="overview" class="hero mb-5">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <h1 class="display-6 fw-bold">OrderX — Scalable, Fast and Modern Order Processing</h1>
+          <p class="lead text-muted">
+            Built on Kafka for event streaming, MySQL for state, deployed on Kubernetes,
+            provisioned with Terraform, and automated via GitHub CI/CD pipelines.
+          </p>
+
+          <div class="d-flex gap-2 flex-wrap mt-3">
+            <a class="btn btn-primary" href="#getting-started">Get Started</a>
+            <a class="btn btn-outline-secondary" href="#architecture">System Architecture</a>
+            <span class="align-self-center text-muted">v<span class="kbd">0.1.0</span></span>
+          </div>
+        </div>
+
+        <div class="col-lg-5 d-none d-lg-block">
+          <svg viewBox="0 0 600 400" width="100%">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#0d6efd" stop-opacity="0.15"/>
+                <stop offset="1" stop-color="#0b5ed7" stop-opacity="0.05"/>
+              </linearGradient>
+            </defs>
+            <rect x="20" y="20" width="560" height="360" rx="16" fill="url(#g1)"></rect>
+            <g transform="translate(70,80)">
+              <rect x="0" y="0" width="160" height="120" rx="10" fill="#fff"></rect>
+              <rect x="190" y="0" width="160" height="120" rx="10" fill="#fff"></rect>
+              <rect x="95" y="150" width="160" height="120" rx="10" fill="#fff"></rect>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="mb-5">
+      <h2 class="h4 fw-bold mb-3">Core Technologies</h2>
+      <div class="row g-3">
+
+        <div class="col-md-6 col-lg-4">
+          <div class="p-3 bg-white border rounded feature-card h-100">
+            <h3 class="h6">Apache Kafka</h3>
+            <p class="small text-muted">
+              Distributed messaging for high-throughput event pipelines. Perfect for event-driven microservices.
+            </p>
+            <p class="mb-0"><strong>Tip:</strong> Separate topics for orders, payments, inventory.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="p-3 bg-white border rounded feature-card h-100">
+            <h3 class="h6">MySQL</h3>
+            <p class="small text-muted">
+              Reliable relational storage for orders, users, and reporting.
+            </p>
+            <p class="mb-0"><strong>Tip:</strong> Use read replicas + connection pooling.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="p-3 bg-white border rounded feature-card h-100">
+            <h3 class="h6">Kubernetes</h3>
+            <p class="small text-muted">
+              Container deployment, scaling, and orchestration with zero-downtime rollouts.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="p-3 bg-white border rounded feature-card h-100">
+            <h3 class="h6">GitHub Actions (CI/CD)</h3>
+            <p class="small text-muted">
+              Automated build, test, and deploy pipelines with pull-request validation.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="p-3 bg-white border rounded feature-card h-100">
+            <h3 class="h6">Terraform</h3>
+            <p class="small text-muted">
+              Infrastructure-as-Code for clusters, networks, DB instances, load balancers and more.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="p-3 bg-white border rounded feature-card h-100">
+            <h3 class="h6">Security Notes</h3>
+            <p class="small text-muted">
+              Enforce TLS between services, encrypt secrets, and apply least-privilege IAM policies.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section id="architecture" class="mb-5">
+      <h2 class="h4 fw-bold mb-3">Architecture (Simplified)</h2>
+
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <div class="p-3 bg-white border rounded">
+            <ol>
+              <li>Clients → API Gateway / Load Balancer</li>
+              <li>Microservices (containers) → communicate through Kafka topics</li>
+              <li>Persistent state in MySQL (primary + replicas)</li>
+              <li>Kubernetes manages scaling and resilience</li>
+              <li>CI/CD: GitHub Actions → Build → Push → Deploy</li>
+              <li>Infrastructure defined entirely in Terraform</li>
+            </ol>
+            <p class="small text-muted mb-0">
+              Can be extended with Service Mesh (e.g., Istio) for observability and traffic control.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <svg role="img" viewBox="0 0 600 260" width="100%" height="180">
+            <rect x="20" y="20" width="560" height="220" rx="12" fill="#fff" stroke="#e9ecef"></rect>
+            <g font-size="12" fill="#495057">
+              <rect x="40" y="40" width="120" height="40" rx="6" fill="#f8f9fa" stroke="#e9ecef"></rect>
+              <text x="100" y="65" text-anchor="middle">Clients</text>
+
+              <rect x="200" y="30" width="160" height="60" rx="6" fill="#fff" stroke="#e9ecef"></rect>
+              <text x="280" y="60" text-anchor="middle">API Gateway</text>
+
+              <rect x="40" y="110" width="160" height="40" rx="6" fill="#fff" stroke="#e9ecef"></rect>
+              <text x="120" y="135" text-anchor="middle">Microservices</text>
+
+              <rect x="240" y="110" width="120" height="40" rx="6" fill="#fff" stroke="#e9ecef"></rect>
+              <text x="300" y="135" text-anchor="middle">Kafka</text>
+
+              <rect x="420" y="110" width="140" height="40" rx="6" fill="#fff" stroke="#e9ecef"></rect>
+              <text x="490" y="135" text-anchor="middle">MySQL</text>
+
+              <path d="M160 60 L200 60" stroke="#adb5bd" stroke-width="2" />
+              <path d="M160 130 L240 130" stroke="#adb5bd" stroke-width="2" />
+              <path d="M360 130 L420 130" stroke="#adb5bd" stroke-width="2" />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- GETTING STARTED -->
+    <section id="getting-started" class="mb-5">
+      <h2 class="h4 fw-bold mb-3">Getting Started</h2>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="p-3 bg-white border rounded">
+            <h3 class="h6">Local Development</h3>
+            <ul class="mb-0">
+              <li>Run Kafka locally with Docker Compose or a managed service.</li>
+              <li>Use Compose to tie Kafka + MySQL + sample microservices.</li>
+              <li>Keep secrets out of code (env vars or encrypted secrets files).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="p-3 bg-white border rounded">
+            <h3 class="h6">CI/CD & Infrastructure</h3>
+            <ul class="mb-0">
+              <li>Create GitHub Actions workflow for build → test → deploy.</li>
+              <li>Use Terraform for cluster, networks, database provisioning.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="mb-5">
+      <h2 class="h4 fw-bold mb-3">Quick Links</h2>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="p-3 bg-white border rounded d-flex justify-content-between align-items-center">
+            <div>
+              <p class="mb-1 fw-semibold">GitHub Repository</p>
+              <p class="mb-0 text-muted small">Add your repository URL here for CI/CD triggers.</p>
+            </div>
+            <div class="d-flex gap-2">
+              <a class="btn btn-outline-primary" href="https://github.com/oar06g/OrderX">Open GitHub</a>
+              <button id="copyBadgeBtn" class="btn btn-outline-secondary">Copy Link</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="pt-4 border-top mt-5 d-flex justify-content-between">
+      <small class="text-muted">
+        © <span id="year"></span> OrderX — Infrastructure Powered
+      </small>
+      <div class="small text-muted">Optimized for Nginx static hosting</div>
+    </footer>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+  <script defer>
+    // Insert year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copy link
+    document.getElementById('copyBadgeBtn').addEventListener('click', async () => {
+      const repoUrl = window.location.origin + '/';
+      try {
+        await navigator.clipboard.writeText(repoUrl);
+        copyBadgeBtn.textContent = 'Copied ✓';
+        setTimeout(()=> copyBadgeBtn.textContent = 'Copy Link', 1600);
+      } catch {
+        alert('Copy manually: ' + repoUrl);
+      }
+    });
+  </script>
+
 </body>
 </html>
